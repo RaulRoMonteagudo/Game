@@ -10,5 +10,5 @@ import com.example.game.entities.Game;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long>{
 	
-	
+	Game findByTitle(String title);
 }

@@ -13,4 +13,12 @@ public class GameResponse {
 	public GameResponse(){
 		
 	}
+
+	public GameResponse(String title, Date date) {
+		super();
+		this.title = title;
+		this.date = date;
+	}
+	
+	
 }

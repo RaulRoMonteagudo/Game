@@ -15,6 +15,7 @@ import com.example.game.services.GameService;
 @Service
 public class GameServiceImpl implements GameService{
 	
+	
 	@Autowired
 	private GameHelper gameHelper;
 	
@@ -25,13 +26,13 @@ public class GameServiceImpl implements GameService{
 	public GameResponse addGame(GameRequest gameDto) {
 		Game game = GameConverter.dtoToEntity(gameDto);
 		gameRepo.save(game);
-		return new GameResponse();
+		return new GameResponse(game.getTitle(), game.getRelease());
 	}
 	
 	@Override
 	public GameRequest getGame(String title) {
-		Optional<Game> game = gameRepo.findById(1L);
-		GameRequest gameRequest = GameConverter.entityToDto(game.get());
+		Game game = gameRepo.findByTitle(title);
+		GameRequest gameRequest = GameConverter.entityToDto(game);
 		return gameRequest;
 	}
 
