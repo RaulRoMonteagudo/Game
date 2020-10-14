@@ -31,6 +31,7 @@ public class GameServiceImpl implements GameService{
 	
 	@Override
 	public GameRequest getGame(String title) {
+		System.out.println(title);
 		Game game = gameRepo.findByTitle(title);
 		GameRequest gameRequest = GameConverter.entityToDto(game);
 		return gameRequest;

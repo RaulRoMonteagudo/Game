@@ -17,6 +17,8 @@ public class GameConverter {
 		GameRequest gameRequest= new GameRequest();
 		gameRequest.setTitle(game.getTitle());
 		gameRequest.setRelease(game.getRelease());
+		gameRequest.setDescription(game.getDescription());
+		//gameRequest.setGenre(game.getGenres().get(0).getGenreName());
 		return gameRequest;
 	}
 }
