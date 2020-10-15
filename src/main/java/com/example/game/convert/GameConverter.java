@@ -1,5 +1,7 @@
 package com.example.game.convert;
 
+import java.util.Optional;
+
 import com.example.game.dtos.request.GameRequest;
 import com.example.game.entities.Game;
 
@@ -13,12 +15,12 @@ public class GameConverter {
 		return game;
 	}
 	
-	public static GameRequest entityToDto(Game game) {
+	public static GameRequest entityToDto(Optional<Game> game) {
 		GameRequest gameRequest= new GameRequest();
-		gameRequest.setTitle(game.getTitle());
-		gameRequest.setRelease(game.getRelease());
-		gameRequest.setDescription(game.getDescription());
-		//gameRequest.setGenre(game.getGenres().get(0).getGenreName());
+		gameRequest.setTitle(game.get().getTitle());
+		gameRequest.setRelease(game.get().getRelease());
+		gameRequest.setDescription(game.get().getDescription());
+		//gameRequest.setGenre(game.get().getGenres()));
 		return gameRequest;
 	}
 }
