@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -37,5 +38,6 @@ public class Game {
 	private Date release;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable
 	private List<Genre> genres = new ArrayList<>();
 }
