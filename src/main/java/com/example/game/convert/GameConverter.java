@@ -2,9 +2,12 @@ package com.example.game.convert;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import com.example.game.dtos.request.GameRequest;
 import com.example.game.entities.Game;
 
+@Component
 public class GameConverter {
 
 	public static Game dtoToEntity(GameRequest gameDto) {

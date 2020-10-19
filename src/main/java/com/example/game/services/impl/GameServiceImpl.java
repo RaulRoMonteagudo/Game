@@ -1,6 +1,8 @@
 package com.example.game.services.impl;
 
+import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,13 @@ import com.example.game.convert.GameConverter;
 import com.example.game.dtos.request.GameRequest;
 import com.example.game.dtos.response.GameResponse;
 import com.example.game.entities.Game;
+import com.example.game.entities.Genre;
 import com.example.game.helper.GameHelper;
 import com.example.game.repository.GameRepository;
+import com.example.game.repository.GenreRepository;
 import com.example.game.services.GameService;
+
+
 
 @Service
 public class GameServiceImpl implements GameService{
@@ -19,12 +25,18 @@ public class GameServiceImpl implements GameService{
 	@Autowired
 	private GameHelper gameHelper;
 	
+	
 	@Autowired
 	private GameRepository gameRepo;
+	
+	@Autowired
+	private GenreRepository genreRepo;
 
 	@Override
 	public GameResponse addGame(GameRequest gameDto) {
 		Game game = GameConverter.dtoToEntity(gameDto);
+		List<Genre> genre = genreRepo.findByGenreName(gameDto.getGenre());
+		game.setGenres(genre);
 		gameRepo.save(game);
 		return new GameResponse(game.getTitle(), game.getRelease());
 	}

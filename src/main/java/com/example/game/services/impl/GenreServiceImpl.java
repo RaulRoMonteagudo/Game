@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.game.convert.GenreDtoToEntity;
 import com.example.game.dtos.request.GenreRequest;
-import com.example.game.dtos.response.GameResponse;
 import com.example.game.dtos.response.GenreResponse;
 import com.example.game.entities.Genre;
 import com.example.game.repository.GenreRepository;
 import com.example.game.services.GenreService;
+
+
 
 @Service
 public class GenreServiceImpl implements GenreService {
