@@ -1,5 +1,6 @@
 package com.example.game.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import com.example.game.dtos.request.GameRequest;
 import com.example.game.dtos.response.GameResponse;
 import com.example.game.entities.Game;
 import com.example.game.entities.Genre;
+import com.example.game.enums.GenderEnum;
 import com.example.game.helper.GameHelper;
 import com.example.game.repository.GameRepository;
 import com.example.game.repository.GenreRepository;
@@ -35,8 +37,14 @@ public class GameServiceImpl implements GameService{
 	@Override
 	public GameResponse addGame(GameRequest gameDto) {
 		Game game = GameConverter.dtoToEntity(gameDto);
-		List<Genre> genre = genreRepo.findByGenreName(gameDto.getGenre());
-		game.setGenres(genre);
+		Genre genre = new Genre();
+		List<Genre> genreList = new ArrayList<Genre>();
+		for(GenderEnum genreName: gameDto.getGenre()) {
+			genre = genreRepo.findByGenreName(genreName);
+			genreList.add(genre);
+			
+		}
+		game.setGenres(genreList);
 		gameRepo.save(game);
 		return new GameResponse(game.getTitle(), game.getRelease());
 	}
