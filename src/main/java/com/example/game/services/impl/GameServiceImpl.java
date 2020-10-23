@@ -57,5 +57,23 @@ public class GameServiceImpl implements GameService{
 		return gameRequest;
 	}
 
+	@Override
+	public GameResponse updateGame(long id, Game game) {
+				
+		Optional<Game> gameOptional = gameRepo.findById(id);
+		
+		Game gameOld = gameOptional.get();
+		
+		gameOld.setTitle(game.getTitle());
+		gameOld.setDescription(game.getDescription());
+		gameOld.setRelease(game.getRelease());
+		gameOld.setGenres(game.getGenres());
+		
+		gameRepo.save(gameOld);
+		GameRequest gameDto = GameConverter.entityToDto(gameOptional);
+		
+		return new GameResponse(gameOld.getTitle(), gameOld.getRelease());
+	}
+
 	
 }
